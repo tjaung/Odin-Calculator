@@ -15,8 +15,8 @@
     <!-- Top of calculator for results and input -->
     <section class='border'>
       <div id='output' class='output-text'>
-        <div id='input'>Inputs</div>
-        <div id='result'>Result</div>
+        <div data-previous id='result'></div>
+        <div data-current id='input'>0</div>
       </div>
 
     
@@ -25,44 +25,38 @@
     
     <!-- Memory Button row -->
       <section id='memory' class='button-holder'>
-        <input type='button' value='MC' class='function'>
-        <input type='button' value='MR' class='function'>
-        <input type='button' value='M+' class='function'>
-        <input type='button' value='M-' class='function'>
-        <input type='button' value='MS' class='function'>
-        <input type='button' value='M^' class='function'>
+        <input type='button' data-memory id='MC' value='MC' class='memory'>
+        <input type='button' data-memory id='MR' value='MR' class='memory'>
+        <input type='button' data-memory id='M+' value='M+' class='memory'>
+        <input type='button' data-memory id='M-' value='M-' class='memory'>
+        <input type='button' data-memory id='MS' value='MS' class='memory'>
       </section>
     
       <div id='main' class='button-holder'>
-        <input type='button' value='%' class='function'>
-        <input type='button' value='CE' class='function'>
-        <input type='button' value='C' class='function'>
-        <input type='button' value='<' class='function'>
-        
-        <input type='button' value='1/x' class='function'>
-        <input type='button' value='x^2' class='function'>
-        <input type='button' value='2/x' class='function'>
-        <input type='button' value='/' class='function'>
+        <input type='button' data-deleteAll id='CE' value='CE' class='clears'>
+        <input type='button' data-deleteCurrent id='C' value='C' class='clears'>
+        <input type='button' data-deleteOne id='back' value='&lArr;' class='clears'>
+        <input type='button' data-operation id='divide' value='/' class='action'>
       
-        <input type='button' value='7' class='inputs'>
-        <input type='button' value='8' class='inputs'>
-        <input type='button' value='9' class='inputs'>
-        <input type='button' value='x' class='function'>
+        <input type='button' data-number value='7' class='inputs'>
+        <input type='button' data-number value='8' class='inputs'>
+        <input type='button' data-number value='9' class='inputs'>
+        <input type='button' data-operation id='mult' value='x' class='action'>
         
-        <input type='button' value='4' class='inputs'>
-        <input type='button' value='5' class='inputs'>
-        <input type='button' value='6' class='inputs'>
-        <input type='button' value='-' class='function'>
+        <input type='button' data-number value='4' class='inputs'>
+        <input type='button' data-number value='5' class='inputs'>
+        <input type='button' data-number value='6' class='inputs'>
+        <input type='button' data-operation id='subtract' value='-' class='action'>
         
-        <input type='button' value='1' class='inputs'>
-        <input type='button' value='2' class='inputs'>
-        <input type='button' value='3' class='inputs'>
-        <input type='button' value='+' class='function'>
+        <input type='button' data-number value='1' class='inputs'>
+        <input type='button' data-number value='2' class='inputs'>
+        <input type='button' data-number value='3' class='inputs'>
+        <input type='button' data-operation id='add' value='+' class='action'>
         
-        <input type='button' value='+/-' class='inputs'>
-        <input type='button' value='0' class='inputs'>
-        <input type='button' value='.' class='inputs'>
-        <input type='button' value='=' class='function'>
+        <input type='button' data-special id='posNeg' value='&#xb1;' class='action'>
+        <input type='button' data-number value='0' class='inputs'>
+        <input type='button' data-number value='.' class='inputs'>
+        <input type='button' data-equals id='equal' value='=' class='action'>
           
       </div>
     </section>
