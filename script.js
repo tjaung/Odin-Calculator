@@ -1,37 +1,92 @@
 class Calculator {
+
+  //Initialize
   constructor(previousInput, currentInput) {
     this.previousInput = previousInput;
     this.currentInput = currentInput;
-    this.clear()
+    this.clear();
+    this.mem = null;
   }
   
+  //clear functions
   clear() {
-    this.currentOperand = '';
+    this.currentOperand = '0';
     this.previousOperand = '';
     this.operation = undefined;
   }
   
   clearCurr() {
-    this.currentOperand = '';
+    this.currentOperand = '0';
   }
   
   clearOne() {
     this.currentOperand = this.currentOperand.toString().slice(0,-1);
   }
   
+  //Memory functions
+  saveM() {
+    if(this.currentOperand == '0') return
+    this.mem = this.currentOperand;
+  }
+  
+  returnM() {
+    if(this.mem === null) return;
+    this.currentOperand = this.mem;
+  }
+  
+  addM() {
+    if(this.currentOperand == '0') return
+    let m = parseFloat(this.mem);
+    this.mem = m + parseFloat(this.currentOperand);
+  }  
+  
+  subtractM() {
+    if(this.currentOperand == '0') return
+    let m = parseFloat(this.mem);
+    this.mem = m - parseFloat(this.currentOperand);
+  }  
+  
+  clearM() {
+    if(this.mem == null) return
+    this.mem = null;
+  }
+  
+  getMemFunc(input) {
+    switch(input) {
+      case 'MC':
+        this.clearM();
+        break;
+      case 'MR':
+        this.returnM();
+        break;
+      case 'M+':
+        this.addM();
+        break;
+      case 'M-':
+        this.subtractM();
+        break;
+      case 'MS':
+        this.saveM();
+        break;
+      default:
+        return;
+    };
+  }
+  
+  //input functions
   appendItem(item) {
     if(item ==='.' && this.currentOperand.includes('.')) return
     this.currentOperand = this.currentOperand.toString() + item.toString()
   }
   
   chooseMath(operation) {
-    if (this.currentOperand === '') return;
-    if(this.previousOperand !== '') {
+    if (this.currentOperand === '0') return;
+    if(this.previousOperand !== '0') {
       this.compute();
     };
     this.operation = operation;
     this.previousOperand = this.currentOperand;
-    this.currentOperand = '';
+    this.currentOperand = '0';
     
   }
   
@@ -75,7 +130,7 @@ class Calculator {
     let intDisplay;
     
     if(isNaN(intDigits)) {
-      intDisplay = '';
+      intDisplay = '0';
     } else {
      intDisplay = intDigits.toLocaleString('en', {
        maximumFractionDigits: 0});     
@@ -111,6 +166,10 @@ const currentInput = document.querySelector('[data-current]');
 
 const calculator = new Calculator(previousInput, currentInput);
 
+
+// add functions to buttons
+
+//number buttons for ui
 numberButts.forEach(button => {
   button.addEventListener('click', () => {
     calculator.appendItem(button.value)
@@ -118,13 +177,14 @@ numberButts.forEach(button => {
   })
 })
 
+// add operations
 operationButts.forEach(button => {
   button.addEventListener('click', () => {
     calculator.chooseMath(button.value)
     calculator.updateUI()
   })
 })
-
+//results
 equalButt.addEventListener('click', button => { 
   calculator.compute();
   calculator.updateUI();
@@ -145,3 +205,11 @@ clearOne.addEventListener('click', button => {
   calculator.updateUI();
 });
 
+// memory buttons
+memoryButts.forEach(button => {
+  button.addEventListener('click', () => {
+    console.log(button.value)
+    calculator.getMemFunc(button.value);
+    calculator.updateUI();
+  });
+});
